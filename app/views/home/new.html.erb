@@ -1,0 +1,124 @@
+<h1 class="title center white">Create Your Own Living Constellation</h1>
+<div class="center">
+  <a href="/" class="center">go back home</a>
+</div>
+
+<div class="new-cell-container">
+  <table class="form col-md-4">
+    <tr>
+      <td>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="0-0"></button>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="0-1"></button>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="0-2"></button>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="0-3"></button>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="0-4"></button>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="1-0"></button>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="1-1"></button>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="1-2"></button>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="1-3"></button>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="1-4"></button>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="2-0"></button>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="2-1"></button>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="2-2"></button>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="2-3"></button>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="2-4"></button>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="3-0"></button>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="3-1"></button>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="3-2"></button>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="3-3"></button>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="3-4"></button>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="4-0"></button>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="4-1"></button>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="4-2"></button>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="4-3"></button>
+        <button type="button" class="star glyphicon glyphicon-star btn btn-primary" id="4-4"></button>
+      </td>
+    </tr>
+    <tr>
+      <td><button type="button" class="btn btn-primary" id="create">CREATE</button></td>
+    </tr>
+    <tr>
+      <td><button type="button" class="btn btn-success" id="clear">CLEAR</button></td>
+    </tr>
+  </table>
+</div>
+
+<div class="organisms"></div>
+
+
+<script>
+    $( document ).ready(function() {
+        var Organism = function () {
+            this.cells = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
+        };
+
+        Organism.prototype.defineXandY = function defineXandY (button) {
+            var id = button.attr('id');
+            this.y = id.split("-").splice(0, 1);
+            this.x = id.split("-").splice(1, 1);
+        };
+
+        Organism.prototype.killCell = function killCell () {
+            this.cells[this.y][this.x] = 0;
+        };
+
+        Organism.prototype.enlivenCell = function enlivenCell () {
+            this.cells[this.y][this.x] = 1;
+        };
+
+        Organism.prototype.changeCell = function changeCell (button) {
+            if(button.hasClass('selected')) {
+                button.removeClass('selected');
+                this.killCell()
+            } else {
+                button.addClass('selected');
+                this.enlivenCell()
+            }
+        };
+
+        newOrganism = new Organism();
+
+        $('button.star').click(function (event) {
+            var id = $(this).attr('id');
+            var button = $(this);
+
+            newOrganism.defineXandY(button);
+            newOrganism.changeCell(button);
+        });
+
+        $('button#create').click(function (event) {
+            createCustomCell();
+            $(this).prop('disabled', true);
+        });
+
+        $('button#clear').click(function (event) {
+            clear();
+        });
+
+        function clear () {
+            location.reload();
+        }
+
+        function createCustomCell () {
+            customCell = new Cell(newOrganism.cells, "custom");
+            customCell.initializeOnPage(newOrganism, "custom");
+            customCell.startRunning(customCell);
+        }
+    });
+</script>

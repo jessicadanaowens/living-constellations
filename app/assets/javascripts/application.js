@@ -13,4 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require Cell
+//= require_tree .
+//= require_self

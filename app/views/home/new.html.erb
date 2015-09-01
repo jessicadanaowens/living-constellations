@@ -64,46 +64,19 @@
 
 <script>
     $( document ).ready(function() {
-        var Organism = function () {
-            this.cells = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
-        };
-
-        Organism.prototype.defineXandY = function defineXandY (button) {
-            var id = button.attr('id');
-            this.y = id.split("-").splice(0, 1);
-            this.x = id.split("-").splice(1, 1);
-        };
-
-        Organism.prototype.killCell = function killCell () {
-            this.cells[this.y][this.x] = 0;
-        };
-
-        Organism.prototype.enlivenCell = function enlivenCell () {
-            this.cells[this.y][this.x] = 1;
-        };
-
-        Organism.prototype.changeCell = function changeCell (button) {
-            if(button.hasClass('selected')) {
-                button.removeClass('selected');
-                this.killCell()
-            } else {
-                button.addClass('selected');
-                this.enlivenCell()
-            }
-        };
-
-        newOrganism = new Organism();
+        newOrganism = new OrganismForm();
 
         $('button.star').click(function (event) {
             var id = $(this).attr('id');
             var button = $(this);
 
-            newOrganism.defineXandY(button);
+            newOrganism.parseId(button);
+            newOrganism.defineXandY();
             newOrganism.changeCell(button);
         });
 
         $('button#create').click(function (event) {
-            createCustomCell();
+            createCustomOrganism();
             $(this).prop('disabled', true);
         });
 
@@ -115,7 +88,7 @@
             location.reload();
         }
 
-        function createCustomCell () {
+        function createCustomOrganism () {
             customCell = new Cell(newOrganism.cells, "custom");
             customCell.initializeOnPage(newOrganism, "custom");
             customCell.startRunning(customCell);

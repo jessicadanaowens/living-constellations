@@ -25,7 +25,11 @@ $( document ).ready(function() {
 
   function createCustomOrganism () {
     customCell = new Cell(newOrganism.cells, "custom");
-    customCell.initializeOnPage(newOrganism, "custom");
+    initializeOnPage("custom");
     customCell.startRunning(customCell);
   }
+
+  function initializeOnPage (cellName) {
+    $('.organisms').append("<div class='col-md-6' id=" + cellName + "><h4 class='white'>" + cellName + "</h4><br><table id=" + cellName + ">" + "</table></div><br>" );
+  };
 });

@@ -26,6 +26,7 @@ $( document ).ready(function() {
   function createCustomOrganism () {
     customCell = new Cell(newOrganism.cells, "custom");
     initializeOnPage("custom");
+    customCell.showOriginalBoard();
     customCell.startRunning(customCell);
   }
 

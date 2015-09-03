@@ -33,6 +33,13 @@ Cell.prototype.initializeOnPage = function initializeOnPage (organism, cellName)
   }
 };
 
+Cell.prototype.showOriginalBoard = function showOriginalBoard () {
+  this.nextBoard = this.board;
+  this.buildTableContents();
+  this.appendTableToPage();
+  this.prepareForNextIteration();
+};
+
 Cell.prototype.showNextBoard = function showNextBoard () {
   this.buildNextBoard();
   this.buildTableContents();

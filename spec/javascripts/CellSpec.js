@@ -576,4 +576,18 @@ describe("Cell", function() {
       });
     });
   });
+
+  describe("showing the original board", function () {
+    it("shows the original board", function () {
+      spyOn(cell, "buildTableContents");
+      spyOn(cell, "appendTableToPage");
+      spyOn(cell, "prepareForNextIteration");
+
+      cell.showOriginalBoard();
+
+      expect(cell.buildTableContents).toHaveBeenCalled();
+      expect(cell.appendTableToPage).toHaveBeenCalled();
+      expect(cell.prepareForNextIteration).toHaveBeenCalled();
+    })
+  })
 });

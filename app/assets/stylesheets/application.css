@@ -63,7 +63,7 @@ h1, h2, h3, h4, h5, p {
 }
 
 .star {
-  color:transparent;
+  color:transparent !important;
 }
 
 table td {
@@ -112,5 +112,6 @@ a {
   color: #65136c;
   opacity: 0.8;
 }
+
 
 
